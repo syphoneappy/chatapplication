@@ -1,0 +1,39 @@
+<!-- templates/simple_chat.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Chat</title>
+</head>
+<body>
+    <h1>Simple Chat</h1>
+    <div id="chat"></div>
+
+    <script>
+// templates/simple_chat.html
+
+const chatSocket = new WebSocket('ws://127.0.0.1:8000/ws/simple/');
+
+chatSocket.onmessage = function (e) {
+    const data = JSON.parse(e.data);
+    document.getElementById('chat').innerHTML += '<p>' + data.message + '</p>';
+};
+
+chatSocket.onclose = function (e) {
+    console.error('Chat socket closed unexpectedly');
+};
+
+chatSocket.onerror = (error) => {
+    console.error('WebSocket error:', error);
+};
+
+function sendMessage() {
+    const messageInput = document.getElementById('message-input');
+    const message = messageInput.value;
+    chatSocket.send(JSON.stringify({ 'message': message }));
+    messageInput.value = '';
+}
+
+    </script>
+</body>
+</html>
