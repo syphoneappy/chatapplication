@@ -31,7 +31,9 @@ python manage.py runserver
 daphne backend.asgi:application
 
 # React development server
-cd frontend
+cd frontend 
+
 npm i
+
 npm start
 
