@@ -13,16 +13,15 @@ class SimpleConsumer(AsyncWebsocketConsumer):
         sanitized_room_name = re.sub(r'[^a-zA-Z0-9\-_\.]', '', self.room_name)
         self.room_group_name = f"chat{sanitized_room_name}"
         print(self.room_group_name)
-        # # Debugging: print the room name
+
         # print(f"Raw Room Name: {self.room_name}")
 
-        # # Use the raw room name as the room group name
+
         # self.room_group_name = f"chat{self.room_name}"
 
-        # # Debugging: print the room group name
         # print(f"Room Group Name: {self.room_group_name}")
 
-        # # Add the user to the room group
+
         await self.channel_layer.group_add(
             self.room_group_name,
             self.channel_name
@@ -33,7 +32,7 @@ class SimpleConsumer(AsyncWebsocketConsumer):
 
 
     async def disconnect(self, close_code):
-        # Remove the user from the room group
+
         await self.channel_layer.group_discard(
             self.room_group_name,
             self.channel_name
@@ -65,7 +64,7 @@ class SimpleConsumer(AsyncWebsocketConsumer):
             room_name = f"chat{str(current_user[:4])}{str(to_user[:4])}"
             print(room_name)
 
-        # Send the message to the determined room group
+  
         await self.channel_layer.group_send(
             room_name,
             {

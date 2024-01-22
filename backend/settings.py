@@ -97,14 +97,6 @@ REST_FRAMEWORK = {
     )
 }
 
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels_redis.core.RedisChannelLayer",
-#         "CONFIG": {
-#              "hosts": ["redis://myfirstrediscache-e0olk8.serverless.use1.cache.amazonaws.com:6379"],
-#         },
-#     },
-# }
 
 CHANNEL_LAYERS = {
     'default': {
